@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+<script src="js/jquery-3.2.1.min.js" type="text/javascript">	</script>
+	<script type="text/javascript">
+		
+	</script>
+</head>
+<link href="css/estilo.css" type="text/css" media="all" rel="stylesheet" />
+<body>
+<div class="wrap">
+				
+				
+				<p>La librería en JavaScript jQuery es una de las más sencillas y útiles que se puedan necesitar a la 
+      hora de desarrollar un sitio web. Posee caracteristicas potentes (selectores de CSS, XPath, con el poder de javascript de crear variables y funciones que interactuen con el documento) y es muy fácil de usar, y es a la vez muy 
+      liviana. Además trae incorporadas funciones adicionales, como AJAX, manipulacion del <acronym title="Document Object Model">DOM</acronym> y 
+      deteccion de  navegadores. </p>
+    <p> En este tutorial vamos a estudiar el uso de jQuery para AJAX, con las facilidades y parametros de 
+      opción que nos brinda. </p>
+    <h3>Requerimientos</h3>
+    
+    <h3>¿Como usar AJAX en jQuery?</h3>
+    <p> jQuery trae incorporado un "módulo" de AJAX, que hace muy facil la utilización de este. Accedemos
+      a la funcion de la siguiente manera: </p>
+      <pre class="codigo">$<span class="br0">(</span>document<span class="br0">)</span>.<span class="me1">ready</span><span class="br0">(</span><span class="kw2">function</span><span class="br0">(</span><span class="br0">)</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.<span class="me1">ajax</span><span class="br0">(</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="br0">}</span><span class="br0">)</span>;
+<span class="br0">}</span><span class="br0">)</span>;</pre>
+    <p> Este se puede poner de la forma expuesta arriba o en una variable (como en "myajax= $.ajax({});"). </p>
+    <h3>Parámetros</h3>
+    <p> jQuery admite un gran numero de parámetros para ajax. (Hay ejemplos de código despues de la tabla): </p>
+    <table border="1" bordercolor="#666666">
+      <tbody><tr>
+        <th bgcolor="#CCCCCC">Parámetro</th>
+        <th bgcolor="#CCCCCC">Explicacion</th>
+        <th bgcolor="#CCCCCC">Valores</th>
+      </tr>
+      <tr>
+        <td><em>async</em></td>
+        <td>Determina que la cargada del objeto ajax se síncrona o asíncrona. Por lo general
+          asíncrona es más útil, ya que la forma síncroa puede trabar el navegador hasta que la carga 
+          este completa</td>
+        <td>Boolean: true por defecto</td>
+      </tr>
+      <tr>
+        <td><em>beforeSend</em></td>
+        <td>Permite llamar una función antes de mandar el objeto ajax.</td>
+        <td>Función: El unico parametro el el objeto.</td>
+      </tr>
+      <tr>
+        <td><em>complete</em></td>
+        <td>Es una funcion que se ejecuta cuando el llamado al ajax esta completo. Permite saber
+          si fue existoso</td>
+        <td>Funcion: Los valores que retorna son el objeto XMLHttpRequest y un string que indica
+          el resultado.</td>
+      </tr>
+      <tr>
+        <td><em>contentType</em></td>
+        <td>Se usa cuando se mandan datos a los servidores a modo de encabezado.</td>
+        <td>String: "application/x-www-form-urlencoded" funciona perfectamente</td>
+      </tr>
+      <tr>
+        <td><em>data</em></td>
+        <td>Se usa para especificar datos a mandar. Estos tienen la siguiente forma:
+          foo=bar&amp;foo2=bar2;. Si los datos a enviar son un vector(array) jQuery los convierte
+          a varios valores con un mismo nombre (si foo["alt1","alt2"], foo="alt1"&amp;foo="alt2";) </td>
+        <td>Array / String con la forma antes mencionada.</td>
+      </tr>
+      <tr>
+        <td><em>dataType</em></td>
+        <td>Indica el tipo de datos que se van a llamar. Si no se especifica jQuery automaticamente
+          encontrará el tipo basado en el header del archivo llamado (pero toma mas tiempo en cargar,
+          asi que especificalo u_u) </td>
+        <td><ul>
+            <li>"xml": Devuelve un documento XML.</li>
+            <li>"html": Devuelve HTML con texto plano, y respeta las etiquetas.</li>
+            <li>"script": Evalua el JavaScript y devuelve texto plano.</li>
+            <li>"json": Evalua la respuesta JSON y devuelve un objeto Javascript </li>
+          </ul></td>
+      </tr>
+      <tr>
+        <td><em>error</em></td>
+        <td>Se ejecuta si ocurre un error al llamar el archivo. Devuelve 3 parametros: El objeto, 
+          un string con el error, y un objeto adicional de error, si este ocurre.</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><em>global</em></td>
+        <td>Permite hacer que el objeto ajax obedezca o desobedezca las reglas para objetos ajax que
+          el usuario pone.</td>
+        <td>Boolean: Por defecto true</td>
+      </tr>
+      <tr>
+        <td><em>ifModified</em></td>
+        <td>Permite que el objeto ajax se active solo si la pagina a cargar se ha modificado.</td>
+        <td>Boolean: Por defecto false</td>
+      </tr>
+      <tr>
+        <td><em>processData</em></td>
+        <td>Por defecto, cada objeto que no sea un string y sea pasado de otro documento, sera 
+          transformado en cadena. Para evitar que esto pase, este parametro se puede poner en false</td>
+        <td>Boolean: Por defecto true.</td>
+      </tr>
+      <tr>
+        <td><em>success</em></td>
+        <td>Permite ejecutar código al ser exitoso un llamado.</td>
+        <td>Función: Recibe los datos que fueron llamados</td>
+      </tr>
+      <tr>
+        <td><em>timeout</em></td>
+        <td>Permite definir un tiempo de espera antes de ejecutar un objeto ajax.</td>
+        <td>Núemro: Un número de milisegundos (ms)</td>
+      </tr>
+      <tr>
+        <td><em>type</em></td>
+        <td>Indica el método que se va a usar</td>
+        <td>"GET" o "POST"</td>
+      </tr>
+      <tr>
+        <td><em>url</em></td>
+        <td>Indica la url de la que va a cargar datos el objeto ajax.</td>
+        <td>String: La url local del documento.</td>
+      </tr>
+    </tbody></table>
+    <h3>Ejemplos</h3>
+    <p> Ahora, despues de ver esa cantidad de parametros tan útiles, pasemos a la parte cool: Ver como se 
+      usan</p>
+      <pre class="codigo">$.<span class="me1">ajax</span><span class="br0">(</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: <span class="st0">"mi-pagina-cool.html"</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: <span class="kw2">function</span><span class="br0">(</span>datos<span class="br0">)</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw3">alert</span><span class="br0">(</span>datos<span class="br0">)</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="br0">}</span>
+<span class="br0">}</span><span class="br0">)</span>;</pre>
+    <p> El código mínimo que necesitamos para hacer funcionar ajax. Sencillo y efectivo. </p>
+      <pre class="codigo">$.<span class="me1">ajax</span><span class="br0">(</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: <span class="st0">"GET"</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: <span class="st0">"test.js"</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataType: <span class="st0">"script"</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;async:<span class="kw2">false</span>;
+<span class="br0">}</span><span class="br0">)</span>;</pre>
+    <p> Vamos a cargar un JavaScript, usando los parametros type, url, dataType y async. DataType es 
+      necesário pues de otro modo el script no se ejecutaría. Tambien es bueno usar async en "false" si
+      el script es vital: Asi el usuario no podra interactuar hasta que se cargue. </p>
+      <pre class="codigo">$.<span class="me1">ajax</span><span class="br0">(</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: <span class="st0">"POST"</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: <span class="st0">"formulario.php"</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data: <span class="st0">"nombre=Juan&amp;apellido=Luna"</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: <span class="kw2">function</span><span class="br0">(</span>datos<span class="br0">)</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw3">alert</span><span class="br0">(</span> <span class="st0">"Se guardaron los datos: "</span> + datos<span class="br0">)</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="br0">}</span>
+<span class="br0">}</span><span class="br0">)</span>;</pre>
+    <p> Insertamos datos en una pagina de php de forma muy sencilla. </p>
+      <pre class="codigo">$.<span class="me1">ajax</span><span class="br0">(</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: <span class="st0">"introduccion-a-jquery.htm"</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;async:<span class="kw2">true</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beforeSend: <span class="kw2">function</span><span class="br0">(</span>objeto<span class="br0">)</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw3">alert</span><span class="br0">(</span><span class="st0">"Adiós, me voy a ejecutar"</span><span class="br0">)</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="br0">}</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;complete: <span class="kw2">function</span><span class="br0">(</span>objeto, exito<span class="br0">)</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw3">alert</span><span class="br0">(</span><span class="st0">"Me acabo de completar"</span><span class="br0">)</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw1">if</span><span class="br0">(</span>exito==<span class="st0">"success"</span><span class="br0">)</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw3">alert</span><span class="br0">(</span><span class="st0">"Y con éxito"</span><span class="br0">)</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="br0">}</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="br0">}</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contentType: <span class="st0">"application/x-www-form-urlencoded"</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataType: <span class="st0">"html"</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error: <span class="kw2">function</span><span class="br0">(</span>objeto, quepaso, otroobj<span class="br0">)</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw3">alert</span><span class="br0">(</span><span class="st0">"Estas viendo esto por que fallé"</span><span class="br0">)</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw3">alert</span><span class="br0">(</span><span class="st0">"Pasó lo siguiente: "</span>+quepaso<span class="br0">)</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="br0">}</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;global: <span class="kw2">true</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ifModified: <span class="kw2">false</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;processData:<span class="kw2">true</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success: <span class="kw2">function</span><span class="br0">(</span>datos<span class="br0">)</span><span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw3">alert</span><span class="br0">(</span>datos<span class="br0">)</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="br0">}</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timeout: <span class="nu0">3000</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: <span class="st0">"GET"</span>
+<span class="br0">}</span><span class="br0">)</span>;</pre>
+    <p> Un llamado ajax con todos los parametros (menos data, ya que no iba a mandar datos) y con sus 
+      opciones en default. Verdad que se puede hacer mucho? </p>
+    <h3>Opciones por defecto para los objetos ajax</h3>
+    <p> jQuery tambien nos da la opcion de añadir parametros por defecto a todos los ajax que carguemos, con
+      la funcion $.ajaxSetup y los parametros ya vistos:</p>
+      <pre class="codigo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.<span class="me1">ajaxSetup</span><span class="br0">(</span> <span class="br0">{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url: <span class="st0">"/xmlhttp/"</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: <span class="st0">"POST"</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contentType: <span class="st0">"application/xhtml+xml"</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="br0">}</span> <span class="br0">)</span>;</pre>
+    <p> Esto haria que los ajax llamados buscaran sus archivos a cargar en la ruta "/xmlhttp/", con método 
+      "POST" y los jalara como "application/xhtml+xml". De esta manera se puede ahorrar mucho tiempo y espacio 
+      al no tener que escribir lo mismo en todos los llamados. </p>
+    <h3>Problemas</h3>
+    <p> El problema más frecuente que ocurre con ajax es cuando se trata de cargar por este una pagina de otro
+      servidor. Por cuestiones de seguridad, algunos navegadores no permiten la ejecución de este tipo de
+      llamados. Sin embargo, hay técnicas (hacks) que se pueden usar para usar ajax cross-domain.
+      Lamentablemente no hablaré de ellas hoy, pero puedes buscar por <a href="http://www.cristalab.com/buscar/ajax+cross-domain/">ajax cross-domain</a>. </p>
+    <p> Bueno, este fue todo el tutorial de ajax por jQuery por el momento. Existen otras funciones, como 
+      $.post() y $.get(), que son mas sencillas pero menos c00l, que trataré en otro tuto. </p>
+    <p> Por si acaso, pueden revisar la documentación oficial de ajax en jQuery (link en inglés): <a href="http://docs.jquery.com/Ajax">http://docs.jquery.com/Ajax</a> </p>
+				
+
+							</div>
+</body>
+</html>

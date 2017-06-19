@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ajax_level</title>
+	<script src="../../../../xampp/htdocs/MOFA_DSW32/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		nom="José";
+		edad=33;
+	$(document).ready(function(){
+		$("#enviar").click(function(e){
+			e.preventDefault();
+			alert("Se presiono enviar");
+				
+			$.ajax({
+                		data:  "nombre= ",+nom+"&edad"+edad,
+                		url:   'peticion.php',
+                		beforeSend: function () {
+                        		$("#resultado").html("Procesando, espere por favor...");
+                },
+                		success:  function (response) {
+                        		$("#resultado").html(response);
+                }
+			});
+		  });
+		});
+	</script>
+</head>
+<body>
+	<form name="frm" id="frm" action="#">
+		<label for="nom">nombre: </label>
+		<input type="text" id="nom" name="nom">		
+		<label for="edad">Edad: </label>
+		<input type="number" max="50" min="12" id="edad">
+		<button name="enviar" id="enviar">Procesar...</button>
+	</form>
+	<div id="resultado"></div>
+</body>
+</html>
